@@ -16,7 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from accounts import views
+
 urlpatterns = [
+    # Django admin
     path("admin/", admin.site.urls),
+    # User management
+    path("accounts/", include("allauth.urls")),
+    # Local apps
     path("", include("cards.urls")),
 ]

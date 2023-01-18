@@ -1,9 +1,17 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView
-from .models import Card, Site
+from django.views.generic import ListView, TemplateView
 from django.shortcuts import render
-
 from random import randint
+from .models import Card, Site
+
+
+class HomePageView(TemplateView):
+    template_name = "home.html"
+
+
+# we don't have this yet
+# class AboutPageView(TemplateView):
+#     template_name = "about.html"
 
 
 class CardListView(ListView):
