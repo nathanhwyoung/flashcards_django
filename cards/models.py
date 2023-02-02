@@ -17,6 +17,10 @@ class Card(models.Model):
     def __str__(self):
         return self.question
 
+    @classmethod
+    def random_card(cls):
+        return cls.objects.order_by("?").first()
+
 
 class UserProgress(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

@@ -2,10 +2,12 @@
 
 {% block content %}
 
-<p>{{ random_card.question }}</p>
+<p>user: {{ user.username }}</p>
+
+{% comment %} <p>{{ random_card.question }}</p>
 
 <details>
     <p>{{ random_card.answer }}</p>
-</details>
+</details> {% endcomment %}
 
 {% endblock content %}
