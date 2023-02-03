@@ -2,12 +2,15 @@
 
 {% block content %}
 
-<p>user: {{ user.username }}</p>
+<p>User: {{ user.username }}</p>
 
-{% comment %} <p>{{ random_card.question }}</p>
-
+<p>{{ random_card.question }}</p>
 <details>
     <p>{{ random_card.answer }}</p>
-</details> {% endcomment %}
+</details>
+<br>
+
+{% include "cards/card_form.html" with solved=True %}
+{% include "cards/card_form.html" with solved=False %}
 
 {% endblock content %}

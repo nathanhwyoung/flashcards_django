@@ -15,11 +15,7 @@ class Card(models.Model):
     url = models.ForeignKey(Site, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.question
-
-    @classmethod
-    def random_card(cls):
-        return cls.objects.order_by("?").first()
+        return f"CARD ID: {self.id}, QUESTION: {self.question}"
 
 
 class UserProgress(models.Model):
@@ -28,4 +24,4 @@ class UserProgress(models.Model):
     is_understood = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"USER: {self.user}, CARD: {self.card}, UNDERSTOOD: {self.is_understood}"
+        return f"CARD ID: {self.card.id}, USER: {self.user}, UNDERSTOOD: {self.is_understood}"

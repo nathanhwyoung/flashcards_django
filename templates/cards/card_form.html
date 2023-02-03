@@ -1,0 +1,21 @@
+{% load crispy_forms_tags %}
+
+<form method="post">
+
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <input type="hidden" name="card_id" value="{{ random_card.id }}">
+    <input type="hidden" name="solved" value="{{ solved }}">
+
+    {% if solved %}
+        <p>
+        <input type="submit" value="I know" class="btn btn-success"/>
+        </p>
+        {% else %}
+        <p>
+        <input type="submit" value="I don't know" class="btn btn-danger"/>
+        </p>
+    {% endif %}
+
+</form>
