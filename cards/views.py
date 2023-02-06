@@ -45,16 +45,19 @@ def practice(request):
     all_cards_ids = Card.objects.all().values_list("id", flat=True)
     # random number from total number of cards
     random_index = randint(0, total_cards - 1)
+
+    cards_left = total_cards - len(cards_understood_ids)
+
     # check to see if the item at random_index in all_cards_ids is already understood
-    while all_cards_ids[random_index] in cards_understood_ids:
-        random_index = randint(0, total_cards - 1)
+    if cards_left > 0:
+        while all_cards_ids[random_index] in cards_understood_ids:
+            random_index = randint(0, total_cards - 1)
+        random_card = Card.objects.all()[random_index]
+        context = {
+            "user": current_user,
+            "random_card": random_card,
+        }
+        return render(request, "cards/question.html", context)
 
-    # this ^ works, now we need an exit strategy when there are no more cards
-
-    random_card = Card.objects.all()[random_index]
-
-    context = {
-        "user": current_user,
-        "random_card": random_card,
-    }
-    return render(request, "cards/question.html", context)
+    # redirect when there are no cards left
+    return redirect("/")
