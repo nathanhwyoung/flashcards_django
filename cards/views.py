@@ -28,16 +28,25 @@ def practice(request):
         if form.is_valid():
             submitted_solved = form.cleaned_data["solved"]
             submitted_card_id = form.cleaned_data["card_id"]
-            user_progress = UserProgress(
-                user=current_user,
-                card=Card.objects.get(id=submitted_card_id),
-                is_understood=submitted_solved,
-            )
-            user_progress.save()
 
-    # generate random card, we will need to exclude the cards that are stored in UserProgress
+            if UserProgress.objects.filter(
+                user=current_user, card=Card.objects.get(id=submitted_card_id)
+            ).exists():
+                UserProgress.objects.filter(
+                    user=current_user, card=Card.objects.get(id=submitted_card_id)
+                ).update(is_understood=submitted_solved)
+            else:
+                UserProgress.objects.create(
+                    user=current_user,
+                    card=Card.objects.get(id=submitted_card_id),
+                    is_understood=submitted_solved,
+                )
+
+    # generate random card, exclude the cards that are stored in UserProgress
     cards_understood_ids = list(
-        UserProgress.objects.filter(user=current_user).values_list("card_id", flat=True)
+        UserProgress.objects.filter(user=current_user, is_understood=True).values_list(
+            "card_id", flat=True
+        )
     )
     # get total number of cards
     total_cards = Card.objects.count()
@@ -45,7 +54,7 @@ def practice(request):
     all_cards_ids = Card.objects.all().values_list("id", flat=True)
     # random number from total number of cards
     random_index = randint(0, total_cards - 1)
-
+    # get num of cards not understood
     cards_left = total_cards - len(cards_understood_ids)
 
     # check to see if the item at random_index in all_cards_ids is already understood
@@ -59,5 +68,5 @@ def practice(request):
         }
         return render(request, "cards/question.html", context)
 
-    # redirect when there are no cards left
+    # implement success page to congratulate user
     return redirect("/")
