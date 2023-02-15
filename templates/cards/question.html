@@ -2,15 +2,26 @@
 
 {% block content %}
 
-<p>User: {{ user.username }}</p>
+<div class="text-center body-div">
 
-<p>{{ random_card.question }}</p>
-<details>
-    <p>{{ random_card.answer }}</p>
-</details>
-<br>
+    <main class="w-100 m-auto">
 
-{% include "cards/card_form.html" with solved=True %}
-{% include "cards/card_form.html" with solved=False %}
+        <h2 class="mb-3 fw-normal"><em>PRACTICE</em></h2>
+
+        <p>User: {{ user.username }}</p>
+
+        <p>{{ random_card.question }}</p>
+        <details>
+            <p>{{ random_card.answer }}</p>
+        </details>
+        <br>
+
+        {% include "cards/card_form.html" with understood=True %}
+        {% include "cards/card_form.html" with understood=False %}
+
+    </main>
+
+</div>
+
 
 {% endblock content %}

@@ -6,9 +6,9 @@
     {{ form|crispy }}
 
     <input type="hidden" name="card_id" value="{{ random_card.id }}">
-    <input type="hidden" name="solved" value="{{ solved }}">
+    <input type="hidden" name="understood" value="{{ understood }}">
 
-    {% if solved %}
+    {% if understood %}
         <p>
         <input type="submit" value="I know" class="btn btn-success"/>
         </p>

@@ -20,13 +20,19 @@ class CardDetailView(LoginRequiredMixin, DetailView):
     model = Card
 
 
+class UserProgressListView(LoginRequiredMixin, ListView):
+    model = UserProgress
+    template_name = "leaderboard.html"
+    context_object_name = "user_progress_list"
+
+
 @login_required
 def practice(request):
     current_user = request.user
     if request.method == "POST":
         form = CardForm(request.POST)
         if form.is_valid():
-            submitted_solved = form.cleaned_data["solved"]
+            submitted_understood = form.cleaned_data["understood"]
             submitted_card_id = form.cleaned_data["card_id"]
 
             if UserProgress.objects.filter(
@@ -34,12 +40,12 @@ def practice(request):
             ).exists():
                 UserProgress.objects.filter(
                     user=current_user, card=Card.objects.get(id=submitted_card_id)
-                ).update(is_understood=submitted_solved)
+                ).update(is_understood=submitted_understood)
             else:
                 UserProgress.objects.create(
                     user=current_user,
                     card=Card.objects.get(id=submitted_card_id),
-                    is_understood=submitted_solved,
+                    is_understood=submitted_understood,
                 )
 
     # generate random card, exclude the cards that are stored in UserProgress
@@ -69,4 +75,4 @@ def practice(request):
         return render(request, "cards/question.html", context)
 
     # implement success page to congratulate user
-    return redirect("/")
+    return redirect("leaderboard")

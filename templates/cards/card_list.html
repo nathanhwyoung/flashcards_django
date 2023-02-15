@@ -4,7 +4,7 @@
 
 {% for card in card_list %}
 
-<h4>{{ card }}</h4>
+<h3><a href="{{ card.get_absolute_url }}">{{ card }}</a></h3>
 
 {% endfor %} 
 

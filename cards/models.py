@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 
 class Site(models.Model):
@@ -16,6 +17,9 @@ class Card(models.Model):
 
     def __str__(self):
         return f"CARD ID: {self.id}, QUESTION: {self.question}"
+
+    def get_absolute_url(self):
+        return reverse("card-detail", args=[str(self.id)])
 
 
 class UserProgress(models.Model):

@@ -4,15 +4,27 @@
 
 {% block content %}
 
-<h1>This is our home page.</h1>
+<div class="text-center body-div">
+
+    <main class="w-100 m-auto">
+
+    <h2 class="mb-3 fw-normal"><em>HOME PAGE</em></h2>
 
 {% if user.is_authenticated %}
+
 <p>Hi {{ user.email }}!</p>
 <p><a href="{% url 'account_logout' %}">Log Out</a></p> 
+
 {% else %}
+
 <p>You are not logged in</p>
 <a href="{% url 'account_login' %}">Log In</a> 
 <a href="{% url 'account_signup' %}">Sign Up</a>
+
 {% endif %}
+
+    </main>
+
+</div>
 
 {% endblock content %}

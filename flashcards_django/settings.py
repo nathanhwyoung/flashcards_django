@@ -156,6 +156,11 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
+
+ACCOUNT_FORMS = {
+    "login": "accounts.forms.CustomLoginForm",
+}
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # CRISPY CONFIG

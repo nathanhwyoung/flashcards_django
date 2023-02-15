@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}LEADERBOARD{% endblock title %}
+
+{% block content %}
+
+<div class="text-center body-div">
+
+    <main class="w-100 m-auto">
+
+        <h2 class="mb-3 fw-normal"><em>LEADERBOARD</em></h2>
+
+        {% for item in user_progress_list %}
+        <div>
+            <p>{{ item.user }}</p>
+            <p>{{ item.card }}</p>
+            <p>{{ item.is_understood }}</p>
+            <hr>
+        </div>
+        {% endfor %}
+
+    </main>
+
+</div>
+
+{% endblock content %}
