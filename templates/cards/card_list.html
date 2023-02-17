@@ -2,10 +2,12 @@
 
 {% block content %}
 
-{% for card in card_list %}
+<h2 class="mb-3 fw-normal"><em>VIEW CARDS</em></h2>
 
-<h3><a href="{{ card.get_absolute_url }}">{{ card }}</a></h3>
+    {% for card in card_list %}
 
-{% endfor %} 
+        <p><a href="{{ card.get_absolute_url }}">{{ card.question }}</a></p>
+
+    {% endfor %} 
 
 {% endblock content %}

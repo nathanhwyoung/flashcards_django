@@ -1,0 +1,194 @@
+https://www.interviewbit.com/django-interview-questions/,,
+,Explain Django Architecture?,"Django follows the MVT (Model View Template) pattern which is based on the Model View Controller architecture. It’s slightly different from the MVC pattern as it maintains its own conventions, so, the controller is handled by the framework itself. The template is a presentation layer. It is an HTML file mixed with Django Template Language (DTL). The developer provides the model, the view, and the template then maps it to a URL, and finally, Django serves it to the user."
+,Explain the django project directory structure?,"manage.py - A command-line utility that allows you to interact with your Django project
+__init__.py - An empty file that tells Python that the current directory should be considered as a Python package
+settings.py - Comprises the configurations of the current project like DB connections.
+urls.py - All the URLs of the project are present here
+wsgi.py - This is an entry point for your application which is used by the web servers to serve the project you have created."
+,What are models in Django?,"A model in Django refers to a class that maps to a database table or database collection. Each attribute of the Django model class represents a database field. They are defined in app/models.py. Every model inherits from django.db.models.Model. The metaclass helps you set things like available permissions, singular and plural versions of the name, associated database table name, whether the model is abstract or not, etc."
+,What are templates in Django or Django template language?,"Templates are an integral part of the Django MVT architecture. They generally comprise HTML, CSS, and js in which dynamic variables and information are embedded with the help of views. Some constructs are recognized and interpreted by the template engine. The main ones are variables and tags. A template is rendered with a context. Rendering just replaces variables with their values, present in the context, and processes tags. Everything else remains as it is.
+The syntax of the Django template language includes the following four constructs : Variables, Tags
+Filters, Comments"
+,What are views in Django?,"A view function, or “view” for short, is simply a Python function that takes a web request and returns a web response. This response can be HTML contents of a web page, or a redirect, or a 404 error, or an XML document, or an image, etc. 
+There are two types of views:
+Function-Based Views: In this, we import our view as a function.
+Class-based Views: It’s an object-oriented approach."
+,What is Django ORM?,"This ORM (an acronym for Object Relational Mapper) enables us to interact with databases in a more pythonic way like we can avoid writing raw queries, it is possible to retrieve, save, delete and perform other operations over the database without ever writing any SQL query. It works as an abstraction layer between the models and the database."
+,Define static files and explain their uses?,"Websites generally need to serve additional files such as images. Javascript or CSS. In Django, these files are referred to as “static files”, Apart from that Django provides django.contrib.staticfiles to manage these static files."
+,What is Django Rest Framework(DRF)?,Django Rest Framework is an open-source framework based upon Django which lets you create RESTful APIs rapidly.
+,What is django-admin and manage.py and explain its commands?,"django-admin is Django’s command-line utility for administrative tasks. In addition to this, a manage.py file is also automatically created in each Django project. Not only does it perform the same purpose as the django-admin but it also sets the DJANGO_SETTINGS_MODULE environment variable to point to the project's settings.py file."
+,What is Jinja templating?,"Jinja Templating is a very popular templating engine for Python, the latest version is Jinja2. 
+Some of its features are:
+Sandbox Execution - This is a sandbox (or a protected) framework for automating the testing process
+HTML Escaping - It provides automatic HTML Escaping as <, >, & characters have special values in templates and if using a regular text, these symbols can lead to XSS Attacks which Jinja deals with automatically.
+Template Inheritance
+Generates HTML templates much faster than default engine
+Easier to debug as compared to the default engine."
+,What are Django URLs?,URLs are one of the most important parts of a web application and Django provides you with an elegant way to design your own custom URLs with help of its module known as URLconf (URL Configuration). You can design your own URLs in Django in the way you like and then map them to the python function (View function). These URLs can be static as well as dynamic. These URLs as present in the urls.py where they are matched with the equivalent view function. 
+,What is the difference between a project and an app in Django?,"In simple words Project is the entire Django application and an app is a module inside the project that deals with one specific use case. For eg, payment system(app) in the eCommerce app(Project)."
+,What are different model inheritance styles in the Django?,"Abstract Base Class Inheritance: Used when you only need the parent class to hold information that you don’t want to write for each child model.
+Multi-Table Model Inheritance:  Used when you are subclassing an existing model and need each model to have its own table in the database.
+Proxy Model Inheritance:  Used when you want to retain the model's field while altering the python level functioning of the model."
+,What are Django Signals?,"Whenever there is a modification in a model, we may need to trigger some actions. Django provides an elegant way to handle these in the form of signals. The signals are the utilities that allow us to associate events with actions. We can implement these by developing a function that will run when a signal calls it."
+,Explain the caching strategies in the Django?,"Caching refers to the technique of storing the output results when they are processed initially so that next time when the same results are fetched again, instead of processing again those already stored results can be used, which leads to faster accessing as well us less resource utilization. Django provides us with a robust cache system that is able to store dynamic web pages so that these pages don’t need to be evaluated again for each request. Some of the caching strategies in Django are listed below:
+Memcached        A memory-based cache server is the fastest and most efficient
+FileSystem Caching        Values of the cache are stored as separate files in a serialized order
+Local-memory Caching        This is used as the default cache strategy by Django if you haven’t set anything. It is per-process as well as thread-safe.
+Database Caching         Cache data will be stored in the database and works very well if you have a fast and well-indexed DB server."
+,Explain user authentication in Django?,"Django comes with a built-in user authentication system, which handles objects like users, groups, user-permissions, and few cookie-based user sessions. Django User authentication not only authenticates the user but also authorizes him. The system consists and operates on these objects:
+Users
+Permissions
+Groups
+Password Hashing System
+Forms Validation
+A pluggable backend system"
+,How to configure static files?,"Ensure that django.contrib.staticfiles is added to your INSTALLED_APPS
+In your settings file. define STATIC_URL for ex.
+STATIC_URL = '/static/'
+In your Django templates, use the static template tag to create the URL for the given relative path using the configured STATICFILES_STORAGE.
+{% load static %}
+<img src=""{% static 'my_sample/abcxy.jpg' %}"" alt=""ABC image"">
+Store your static files in a folder called static in your app. For example my_sample/static/my_sample/abcxy.jpg"
+,Explain Django Response lifecycle?,"Whenever a request is made to a web page, Django creates an HttpRequest object that contains metadata about the request. After that Django loads the particular view, passing the HttpRequest as the first argument to the view function. Each view will be returning an HttpResponse object. On the big picture following steps occur when a request is received by Django:
+First of the Django settings.py file is loaded which also contain various middleware classes (MIDDLEWARES)
+The middlewares are also executed in the order in which they are mentioned in the MIDDLEWAREST
+From here on the request is now moved to the URL Router, who simply gets the URL path from the request and tries to map with our given URL paths in the urls.py. 
+As soon as it has mapped, it will call the equivalent view function, from where an equivalent response is generated
+The response also passes through the response middlewares and send back to the client/browser."
+,What databases are supported by Django?,"PostgreSQL and MySQL, SQLite and Oracle. Apart from these, Django also supports databases such as ODBC, Microsoft SQL Server, IBM DB2, SAP SQL Anywhere, and Firebird using third-party packages. Note: Officially Django doesn’t support any no-SQL databases."
+,What's the use of a session framework?,"Using the session framework, you can easily store and retrieve arbitrary data based on the pre-site-visitors. It stores data on the server-side and takes care of the process of sending and receiving cookies. These cookies just consist of a session ID, not the actual data itself unless you explicitly use a cookie-based backend."
+,What’s the use of Middleware in Django?,"Middleware is something that executes between the request and response. In simple words, you can say it acts as a bridge between the request and response. Similarly In Django when a request is made it moves through middlewares to views and data is passed through middleware as a response. "
+,What is context in the Django?,"Context is a dictionary mapping template variable name given to Python objects in Django. This is the general name, but you can give any other name of your choice if you want."
+,What is django.shortcuts.render function?,"When a view function returns a webpage as HttpResponse instead of a simple string, we use render(). Render function is a shortcut function that lets the developer easily pass the data dictionary with the template. This function then combines the template with a data dictionary via templating engine. Finally, this render() returns as HttpResponse with the rendered text, which is the data returned by models. Thus, Django render() bypasses most of the developer’s work and lets him use different template engines.
+The basic syntax:
+render(request, template_name, context=None, content_type=None, status=None, using=None)
+The request is the parameter that generates the response. The template name is the HTML template used, whereas the context is a dict of the data passed on the page from the python. You can also specify the content type, the status of the data you passed, and the render you are returning."
+,What’s the significance of the settings.py file?,"As the name suggests this file stores the configurations or settings of our Django project, like database configuration, backend engines, middlewares, installed applications, main URL configurations, static file addresses, templating engines, main URL configurations, security keys, allowed hosts, and much more."
+,How to view all items in the Model?,ModelName.objects.all()
+,How to filter items in the Model?,ModelName.objects.filter(field_name=”term”)
+,How to use file-based sessions?,"To use the same, you need to set the SESSION_ENGINE settings to ""django.contrib.sessions.backends.file"""
+,What is mixin?,Mixin is a type of multiple inheritances wherein you can combine behaviors and attributes of more than one parent class. It provides us with an excellent way to reuse code from multiple classes. One drawback of using these mixins is that it becomes difficult to analyze what a class is doing and which methods to override in case of its code being too scattered between multiple classes.
+,What is Django Field Class?,"Field' refers to an abstract class that represents a column in the database table. The Field class is just a subclass of RegisterLookupMixin. In Django, these fields are used to create database tables (db_types()) which are used to map Python types to the database using get_prep_value() and the other way round using from_db_value() method. Therefore, fields are fundamental pieces in different Django APIs such as models and querysets."
+,Why is permanent redirection not a good option?,Permanent redirection is used only when you don’t want to lead visitors to the old URLs. The response of the permanent redirections is cached by the browser so when you try to redirect to something else it will cause issues. Since this is a browser-side operation if your user wants to move to a new page it will load the same page.
+,Difference between Django OneToOneField and ForeignKey Field?,"Both of them are of the most common types of fields used in Django. The only difference between these two is that ForeignKey field consists of on_delete option along with a model’s class because it’s used for many-to-one relationships while on the other hand, the OneToOneField, only carries out a one-to-one relationship and requires only the model’s class."
+,How can you combine multiple QuerySets in a View?,"Initially, Concatenating QuerySets into lists is believed to be the easiest approach. Here’s an example of how to do that:
+from itertools import chain
+result_list = list(chain(model1_list, model2_list, model3_list))"
+,How to get a particular item in the Model?,"ModelName.objects.get(id=”term”)
+Note: If there are no results that match the query, get() will raise a DoesNotExist exception. If more than one item matches the given get() query. In this case, it’ll raise MultipleObjectsReturned, which is also an attribute of the model class itself."
+,How to obtain the SQL query from the queryset?,print(queryset.query)
+,What are the ways to customize the functionality of the Django admin interface?,"There are multiple ways to customize the functionality of the Django admin interface. You can piggyback on top of an add/change form that’s automatically generated by Django, you can add JavaScript modules using the js parameter. This parameter is basically a list of URLs that point to the JavaScript modules that are to be included in your project within a <script> tag. You can also write views for the admin if you want."
+,Difference between select_related and prefetch_related?,"Though both the functions are used to fetch the related fields on a model but their functioning is bit different from each other. In simple words, select_related uses a foreign key relationship, i.e. using join on the query itself while on the prefetch_related there is a separate lookup and the joining on the python side. Let’s try to illustrate this via an example:
+
+from django.db import models
+class Country(models.Model):
+    country_name = models.CharField(max_length=5)
+class State(models.Model):
+    state_name = models.CharField(max_length=5)
+    country = model.ForeignKey(Country)
+>> states = State.objects.select_related(‘country’).all()
+>> for state in states:
+…   print(state.state_name)  
+```Query Executed
+SELECT state_id, state_name, country_name FROM State INNER JOIN Country ON (State.country_id = Country.id)
+```
+>> country = Country.objects.prefetch_related(‘state’).get(id=1)
+>> for state in country.state.all():
+…   print(state.state_name)
+```Query Executed
+SELECT id, country_name FROM country WHERE id=1;
+SELECT state_id, state_name WHERE State WHERE country_id IN (1);
+```"
+,Explain Q objects in Django ORM?,"Q objects are used to write complex queries, as in filter() functions just `AND` the conditions while if you want to `OR` the conditions you can use Q objects. Let’s see an example:
+
+from django.db import models
+from django.db.models import Q
+>> objects = Models.objects.get(
+   Q(tag__startswith='Human'),
+   Q(category=’Eyes’) | Q(category=’Nose’)
+)
+```Query Executed
+SELECT * FROM Model WHERE tag LIKE ‘Human%’ AND (category=’Eyes’ OR category=’Nose’)
+```"
+,What are Django exceptions?,"In addition to the standard Python exceptions, Django raises of its own exceptions.List of the exceptions by Django (https://docs.djangoproject.com/en/3.1/ref/exceptions/)"
+https://www.javatpoint.com/django-interview-questions-and-answers,,
+,Explain Django.,"Django is a free and open source web application framework, written in Python. It is a server-side web framework that provides rapid development of secure and maintainable websites."
+,What does Django mean?,"Django is named after Django Reinhardt, a gypsy jazz guitarist from the 1930s to early 1950s who is known as one of the best guitarists of all time."
+,Which architectural pattern does Django follow?,"Django follows Model-View-Template (MVT) architectural pattern. Here, a user requests for a resource to the Django, Django works as a controller and check to the available resource in URL. If URL maps, a view is called that interact with model and template, it renders a template. Django responds back to the user and sends a template as a response."
+,Explain Django architecture.,"Django follows MVT (Model View Template) pattern. It is slightly different from MVC. Model: It is the data access layer. It contains everything about the data, i.e., how to access it, how to validate it, its behaviors and the relationships between the data. View: It is the business logic layer. This layer contains the logic that accesses the model and defers to the appropriate template. It is like a bridge between the model and the template. Template: It is a presentation layer. This layer contains presentation-related decisions, i.e., how something should be displayed on a Web page or other type of document."
+,Is Django a high-level web framework or low-level framework?,"Django is a high-level Python's web framework which was designed for rapid development and clean, realistic design."
+,How would you pronounce Django?,Django is pronounced JANG-oh. Here D is silent.
+,How does Django work?,"Django can be broken into many components:
+Models.py file: This file defines your data model by extending your single line of code into full database tables and add a pre-built administration section to manage content.
+Urls.py file: It uses a regular expression to capture URL patterns for processing.
+Views.py file: It is the main part of Django. The actual processing happens in view.
+When a visitor lands on Django page, first Django checks the URLs pattern you have created and used the information to retrieve the view. After that view processes the request, querying your database if necessary, and passes the requested information to a template. After that, the template renders the data in a layout you have created and displayed the page"
+,Which foundation manages the Django web framework?,"Django web framework is managed and maintained by an independent and non-profit organization named Django Software Foundation (DSF). The primary foundation goal is to promote, support, and advance the Django Web framework."
+,Is Django stable?,"Yes, Django is quite stable. Many companies like Disqus, Instagram, Pinterest, and Mozilla have been using Django for many years."
+,What are the features available in Django web framework?,"Features available in Django web framework are:
+Admin Interface (CRUD)
+Templating
+Form handling
+Internationalization
+A Session, user management, role-based permissions
+Object-relational mapping (ORM)
+Testing Framework
+Fantastic Documentation"
+,Explain the advantages of Django?,"Advantages of Django:
+Django is a Python's framework which is easy to learn.
+It is clear and readable.
+It is versatile.
+It is fast to write.
+No loopholes in design.
+It is secure.
+It is scalable.
+It is versatile."
+,What are the disadvantages of Django?,"Following is the list of disadvantages of Django:
+Django' modules are bulky.
+It is completely based on Django ORM.
+Components are deployed together.
+You must know the full system to work with it."
+,What are the inheritance styles in Django?,"There are three possible inheritance styles in Django:
+1) Abstract base classes: This style is used when you only want parent's class to hold information that you don't want to type out for each child model.
+2) Multi-table Inheritance: This style is used if you are sub-classing an existing model and need each model to have its database table.
+3) Proxy models: This style is used, if you only want to modify the Python level behavior of the model, without changing the model's fields."
+,Is Django a content management system (CMS)?,"No, Django is not a CMS. Instead, it is a Web framework and a programming tool that makes you able to build websites."
+,How can you set up static files in Django?,"There are three main things required to set up static files in Django:
+1) Set STATIC_ROOT in settings.py
+2) run manage.py collect static
+3) set up a Static Files entry on the PythonAnywhere web tab"
+,What is some typical usage of middlewares in Django?,"Some usage of middlewares in Django is:
+Session management,
+Use authentication
+Cross-site request forgery protection
+Content Gzipping"
+,What does of Django field class types do?,"The Django field class types specify:
+The database column type.
+The default HTML widget to avail while rendering a form field.
+The minimal validation requirements used in Django admin.
+Automatic generated forms."
+,What is the usage of Django-admin.py and manage.py?,"Django-admin.py: It is a Django's command line utility for administrative tasks.
+Manage.py: It is an automatically created file in each Django project. It is a thin wrapper around the Django-admin.py. It has the following usage:
+It puts your project's package on sys.path.
+It sets the DJANGO_SETTING_MODULE environment variable to points to your project's setting.py file."
+,What are the signals in Django?,Signals are pieces of code which contain information about what is happening. A dispatcher is used to sending the signals and listen for those signals.
+,What are the two important parameters in signals?,"Two important parameters in signals are:
+Receiver: It specifies the callback function which connected to the signal.
+Sender: It specifies a particular sender from where a signal is received."
+,How to handle URLs in Django?,"To handle URL, django.urls module is used by the Django framework. The path function takes the first argument as a route of string or regex type. The view argument is a view function which is used to return a response (template) to the user. The django.urls module contains various functions, path(route,view,kwargs,name) is one of those which is used to map the URL and call the specified view."
+,What is Django Exception?,"An exception is an abnormal event that leads to program failure. To deal with this situation, Django uses its exception classes and supports all core Python exceptions as well. Django core exceptions classes are defined in django.core.exceptions module."
+,What are the different types of Django Exception Classes?,"The django.core.exceptions module contains the following classes
+AppRegistryNotReady        It is raised when attempting to use models before the app loading process.
+ObjectDoesNotExist        The base class for DoesNotExist exceptions.
+EmptyResultSet        If a query does not return any result, this exception is raised.
+FieldDoesNotExist        It raises when the requested field does not exist.
+MultipleObjectsReturned        This exception is raised by a query if only one object is expected, but multiple objects are returned.
+SuspiciousOperation        This exception is raised when a user has performed an operation that should be considered suspicious from a security perspective.
+PermissionDenied        It is raised when a user does not have permission to perform the action requested.
+ViewDoesNotExist        It is raised by django.urls when a requested view does not exist.
+MiddlewareNotUsed        It is raised when a middleware is not used in the server configuration.
+ImproperlyConfigured        The ImproperlyConfigured exception is raised when Django is somehow improperly configured.
+FieldError        It is raised when there is a problem with a model field.
+ValidationError        It is raised when data validation fails to form or model field validation."
+,What is Django Session?,"A session is a mechanism to store information on the server side during the interaction with the web application. By default, session stores in the database and also allows file-based and cache based sessions."
+,What is the role of Cookie in Django?,A cookie is a small piece of information which is stored in the client browser. It is used to store user's data in a file permanently (or for the specified time). Cookie has its expiry date and time and removes automatically when gets expire. Django provides built-in methods to set and fetch cookie. The set_cookie() method is used to set a cookie and get() method is used to get the cookie. The request.COOKIES['key'] array can also be used to get cookie values.

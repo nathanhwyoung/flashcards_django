@@ -4,11 +4,7 @@
 
 {% block content %}
 
-<div class="text-center body-div">
-
-    <main class="w-100 m-auto">
-
-    <h2 class="mb-3 fw-normal"><em>HOME PAGE</em></h2>
+<h2 class="mb-3 fw-normal"><em>HOME</em></h2>
 
 {% if user.is_authenticated %}
 
@@ -22,9 +18,5 @@
 <a href="{% url 'account_signup' %}">Sign Up</a>
 
 {% endif %}
-
-    </main>
-
-</div>
 
 {% endblock content %}

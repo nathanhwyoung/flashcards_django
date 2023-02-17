@@ -4,23 +4,15 @@
 
 {% block content %}
 
-<div class="text-center body-div">
+<h2 class="mb-3 fw-normal"><em>LEADERBOARD</em></h2>
 
-    <main class="w-100 m-auto">
-
-        <h2 class="mb-3 fw-normal"><em>LEADERBOARD</em></h2>
-
-        {% for item in user_progress_list %}
-        <div>
-            <p>{{ item.user }}</p>
-            <p>{{ item.card }}</p>
-            <p>{{ item.is_understood }}</p>
-            <hr>
-        </div>
-        {% endfor %}
-
-    </main>
-
+{% for item in user_progress_list %}
+<div>
+    <p>{{ item.user }}</p>
+    <p>{{ item.card }}</p>
+    <p>{{ item.is_understood }}</p>
+    <hr>
 </div>
+{% endfor %}
 
 {% endblock content %}

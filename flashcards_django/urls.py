@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from accounts import views
+from accounts.views import ProfileView
 
 urlpatterns = [
     # Django admin
     path("admin/", admin.site.urls),
     # User management
     path("accounts/", include("allauth.urls")),
+    path("accounts/profile/", ProfileView.as_view(), name="profile"),
     # Local apps
     path("", include("cards.urls")),
 ]

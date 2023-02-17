@@ -26,7 +26,6 @@ class CustomUserChangeForm(UserChangeForm):
 class CustomLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):
         super(CustomLoginForm, self).__init__(*args, **kwargs)
-        # E-MAIL FIELD
         self.fields["login"].widget = forms.TextInput(
             attrs={
                 "type": "email",
@@ -36,7 +35,6 @@ class CustomLoginForm(LoginForm):
             }
         )
         self.fields["login"].label = ""
-        # # PASSWORD FIELD
         self.fields["password"].widget = forms.PasswordInput(
             attrs={
                 "placeholder": "PASSWORD",
