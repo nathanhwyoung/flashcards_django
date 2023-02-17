@@ -3,7 +3,9 @@ from django.views.generic import ListView, TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import F
 from random import randint
+from datetime import datetime
 from .models import Card, UserProgress
 from .forms import CardForm
 
@@ -35,18 +37,45 @@ def practice(request):
             submitted_understood = form.cleaned_data["understood"]
             submitted_card_id = form.cleaned_data["card_id"]
 
+            # THIS NEEDS TO BE CLEANED UP, BIGTIME
+            # if UP object exists, update it
             if UserProgress.objects.filter(
                 user=current_user, card=Card.objects.get(id=submitted_card_id)
             ).exists():
-                UserProgress.objects.filter(
-                    user=current_user, card=Card.objects.get(id=submitted_card_id)
-                ).update(is_understood=submitted_understood)
+                # if card is understood, update the date_understood datetime field
+                if submitted_understood == True:
+                    UserProgress.objects.filter(
+                        user=current_user, card=Card.objects.get(id=submitted_card_id)
+                    ).update(
+                        is_understood=submitted_understood,
+                        date_understood=datetime.now(),
+                        times_seen=F("times_seen") + 1,
+                    )
+                # if not, simply update the object
+                else:
+                    UserProgress.objects.filter(
+                        user=current_user, card=Card.objects.get(id=submitted_card_id)
+                    ).update(
+                        is_understood=submitted_understood,
+                        times_seen=F("times_seen") + 1,
+                    )
+            # if UP object does NOT exist, create it
             else:
-                UserProgress.objects.create(
-                    user=current_user,
-                    card=Card.objects.get(id=submitted_card_id),
-                    is_understood=submitted_understood,
-                )
+                if submitted_understood == True:
+                    UserProgress.objects.create(
+                        user=current_user,
+                        card=Card.objects.get(id=submitted_card_id),
+                        is_understood=submitted_understood,
+                        date_understood=datetime.now(),
+                        times_seen=1,
+                    )
+                else:
+                    UserProgress.objects.create(
+                        user=current_user,
+                        card=Card.objects.get(id=submitted_card_id),
+                        is_understood=submitted_understood,
+                        times_seen=1,
+                    )
 
     # generate random card, exclude the cards that are stored in UserProgress
     cards_understood_ids = list(

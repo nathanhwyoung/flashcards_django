@@ -26,6 +26,10 @@ class UserProgress(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     is_understood = models.BooleanField(default=False)
+    date_first_seen = models.DateTimeField(auto_now_add=True)
+    date_last_seen = models.DateTimeField(auto_now=True)
+    date_understood = models.DateTimeField(null=True)
+    times_seen = models.IntegerField()
 
     def __str__(self):
         return f"CARD ID: {self.card.id}, USER: {self.user}, UNDERSTOOD: {self.is_understood}"
