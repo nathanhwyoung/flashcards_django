@@ -23,7 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # User management
     path("accounts/", include("allauth.urls")),
-    path("accounts/profile/", ProfileView.as_view(), name="profile"),
+    path("accounts/", include("accounts.urls")),
     # Local apps
     path("", include("cards.urls")),
 ]
