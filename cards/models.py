@@ -32,4 +32,4 @@ class UserProgress(models.Model):
     times_seen = models.IntegerField()
 
     def __str__(self):
-        return f"CARD ID: {self.card.id}, USER: {self.user}, UNDERSTOOD: {self.is_understood}"
+        return f"CARD ID: {self.card.id}, USER: {self.user}, QUESTION: {self.card.question}, UNDERSTOOD: {self.is_understood}"

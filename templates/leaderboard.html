@@ -8,13 +8,13 @@
 
 {% for item in user_progress_list %}
 <div>
-    <p>{{ item.user }}</p>
-    <p>{{ item.card }}</p>
-    <p>{{ item.is_understood }}</p>
-    <p>{{ item.date_first_seen }}</p>
-    <p>{{ item.date_last_seen }}</p>
-    <p>{{ item.date_understood }}</p>
-    <p>{{ item.times_seen }}</p>
+    <p>USERNAME: {{ item.user }}</p>
+    <p>QUESTION: {{ item.card.question }}</p>
+    <p>UNDERSTOOD: {{ item.is_understood }}</p>
+    <p>DATE FIRST SEEN: {{ item.date_first_seen }}</p>
+    <p>DATE LAST SEEN: {{ item.date_last_seen }}</p>
+    <p>DATE UNDERSTOOD: {{ item.date_understood }}</p>
+    <p>TIMES SEEN: {{ item.times_seen }}</p>
     <hr>
 </div>
 {% endfor %}
