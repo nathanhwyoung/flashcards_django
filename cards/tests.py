@@ -1,7 +1,8 @@
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
-
+from accounts.models import CustomUser
 from .models import Card, UserProgress, Site
+from datetime import datetime
 
 class HomepageTests(SimpleTestCase):
     def test_url_exists_at_correct_location(self):
@@ -39,10 +40,22 @@ class CardTests(TestCase):
         self.assertEqual(self.card.question, "what is django?")
         self.assertEqual(self.card.answer, "it's a web framework")
         
-# class UserProgressTests(TestCase):
-#     @classmethod
-#     def setUpTestData(cls):
-#         site = Site.objects.create(url="https://www.google.com/")
-#         card = Card.objects.create(question="what is django?", answer="it's a web framework", url=site)
-#         cls.user_progress = UserProgress.objects.create()
+# these tests could use some work
+class UserProgressTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        site = Site.objects.create(url="https://www.google.com/")
+        card = Card.objects.create(question="what is django?", answer="it's a web framework", url=site)
+        cls.user_progress = UserProgress.objects.create(
+            user = CustomUser.objects.create(username="testuser"),
+            card = card,
+            is_understood = True,
+            date_first_seen = datetime.now(),
+            date_last_seen = datetime.now(),
+            date_understood = datetime.now(),
+            times_seen = 3,
+        )
+        
+    def test_model_content(self):
+        self.assertEqual(self.user_progress.user.username, "testuser")
         
