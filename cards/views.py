@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import F
 from random import randint
@@ -20,12 +21,6 @@ class CardListView(LoginRequiredMixin, ListView):
 
 class CardDetailView(LoginRequiredMixin, DetailView):
     model = Card
-
-
-class UserProgressListView(LoginRequiredMixin, ListView):
-    model = UserProgress
-    template_name = "leaderboard.html"
-    context_object_name = "user_progress_list"
 
 
 @login_required
@@ -105,3 +100,34 @@ def practice(request):
 
     # implement success page to congratulate user
     return redirect("leaderboard")
+
+
+@login_required
+def leaderboard(request):
+    users = get_user_model().objects.all()
+    total_cards = Card.objects.all().count()
+    leaderboard_data = []
+    # for each user, query the db and append an object to the list
+    for user in users:
+        individual_query = UserProgress.objects.filter(user__username=user)
+        if individual_query:
+            # # of items completed
+            cards_understood = 0
+            for user_progress in individual_query:
+                if user_progress.is_understood == True:
+                    cards_understood += 1
+            # % of items completed
+            percentage_completed = cards_understood/total_cards
+            percentage_completed_formatted = "{:.0%}".format(percentage_completed)
+            leaderboard_data.append(
+                {
+                    "user": user.username,
+                    "cards_understood": cards_understood,
+                    "percentage_completed": percentage_completed_formatted,
+                }
+            )
+    context = {
+        "data": leaderboard_data
+    }
+    return render(request, "leaderboard.html", context)
+    

@@ -6,17 +6,22 @@
 
 <h2 class="mb-5 fw-normal"><em>LEADERBOARD</em></h2>
 
-{% for item in user_progress_list %}
 <div>
-    <p>USERNAME: {{ item.user }}</p>
-    <p>QUESTION: {{ item.card.question }}</p>
-    <p>UNDERSTOOD: {{ item.is_understood }}</p>
-    <p>DATE FIRST SEEN: {{ item.date_first_seen }}</p>
-    <p>DATE LAST SEEN: {{ item.date_last_seen }}</p>
-    <p>DATE UNDERSTOOD: {{ item.date_understood }}</p>
-    <p>TIMES SEEN: {{ item.times_seen }}</p>
-    <hr>
+    <h3>FLASHCARDS COMPLETED</h3>
+    <ol>
+    {% for item in data|dictsortreversed:"cards_understood" %}
+        <li>{{ item.user }} - {{ item.cards_understood }}</li>
+    {% endfor %}
+    </ol>
 </div>
-{% endfor %}
+
+<div>
+    <h3>PERCENTAGE COMPLETED</h3>
+    <ol>
+        {% for item in data|dictsortreversed:"percentage_completed" %}
+            <li>{{ item.user }} - {{ item.percentage_completed }}</li>
+        {% endfor %}
+    </ol>
+</div>
 
 {% endblock content %}

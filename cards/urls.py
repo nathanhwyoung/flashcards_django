@@ -4,7 +4,7 @@ from .views import (
     CardListView,
     HomePageView,
     CardDetailView,
-    UserProgressListView,
+    leaderboard,
     practice,
 )
 
@@ -13,5 +13,5 @@ urlpatterns = [
     path("practice/", practice, name="practice"),
     path("detail/<int:pk>", CardDetailView.as_view(), name="card-detail"),
     path("all_cards/", CardListView.as_view(), name="card-list"),
-    path("leaderboard/", UserProgressListView.as_view(), name="leaderboard"),
+    path("leaderboard/", leaderboard, name="leaderboard"),
 ]
