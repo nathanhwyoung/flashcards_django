@@ -32,25 +32,21 @@ def practice(request):
             submitted_understood = form.cleaned_data["understood"]
             submitted_card_id = form.cleaned_data["card_id"]
 
-            # THIS NEEDS TO BE CLEANED UP, BIGTIME
-            # if UP object exists, update it
-            if UserProgress.objects.filter(
+            up = UserProgress.objects.filter(
                 user=current_user, card=Card.objects.get(id=submitted_card_id)
-            ).exists():
+            )
+            # if UP object exists, update it
+            if up.exists():
                 # if card is understood, update the date_understood datetime field
                 if submitted_understood == True:
-                    UserProgress.objects.filter(
-                        user=current_user, card=Card.objects.get(id=submitted_card_id)
-                    ).update(
+                    up.update(
                         is_understood=submitted_understood,
                         date_understood=datetime.now(),
                         times_seen=F("times_seen") + 1,
                     )
                 # if not, simply update the object
                 else:
-                    UserProgress.objects.filter(
-                        user=current_user, card=Card.objects.get(id=submitted_card_id)
-                    ).update(
+                    up.update(
                         is_understood=submitted_understood,
                         times_seen=F("times_seen") + 1,
                     )

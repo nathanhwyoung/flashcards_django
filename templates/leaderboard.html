@@ -18,7 +18,7 @@
 <div>
     <h3>PERCENTAGE COMPLETED</h3>
     <ol>
-        {% for item in data|dictsortreversed:"percentage_completed" %}
+        {% for item in data|dictsort:"percentage_completed" %}
             <li>{{ item.user }} - {{ item.percentage_completed }}</li>
         {% endfor %}
     </ol>
