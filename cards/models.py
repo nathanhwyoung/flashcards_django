@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 
-class Site(models.Model):
+class WebSite(models.Model):
     url = models.URLField()
 
     def __str__(self):
@@ -13,7 +13,7 @@ class Site(models.Model):
 class Card(models.Model):
     question = models.CharField(max_length=150)
     answer = models.TextField()
-    url = models.ForeignKey(Site, on_delete=models.CASCADE)
+    url = models.ForeignKey(WebSite, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"CARD ID: {self.id}, QUESTION: {self.question}"
@@ -33,3 +33,6 @@ class UserProgress(models.Model):
 
     def __str__(self):
         return f"CARD ID: {self.card.id}, USER: {self.user}, QUESTION: {self.card.question}, UNDERSTOOD: {self.is_understood}"
+
+    class Meta:
+        verbose_name_plural = 'User Progress'
