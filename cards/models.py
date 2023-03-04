@@ -14,6 +14,7 @@ class Card(models.Model):
     question = models.CharField(max_length=150)
     answer = models.TextField()
     url = models.ForeignKey(WebSite, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"CARD ID: {self.id}, QUESTION: {self.question}"
