@@ -3,6 +3,7 @@ from django.views.generic import ListView, TemplateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import F
 from random import randint
@@ -75,7 +76,6 @@ def practice(request):
         )
     )
     
-    
     # get total number of cards
     total_cards = Card.objects.count()
     
@@ -100,9 +100,11 @@ def practice(request):
             return render(request, "cards/question.html", context)
 
         # add message to congratulate user if no cards are left
+        messages.success(request, 'congratulations! you have mastered all of the cards.')
         return redirect("leaderboard")
     
     # add message and redirect
+    messages.info(request, 'there are no cards in the stack right now.')
     return redirect("home")
     
     
