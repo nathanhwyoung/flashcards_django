@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h2 class="mb-5 fw-normal">Account</h2>
+
+<h3>Profile</h3>
+
+<p><a href="{% url 'account_logout' %}">Log Out</a></p> 
+
+{% endblock content %}

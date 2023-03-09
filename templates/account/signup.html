@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}Sign Up{% endblock title %}
-
 {% block content %}
 
-<h2 class="mb-5 fw-normal"><em>Sign Up</em></h2>
+<h2 class="mb-5 fw-normal">Sign Up</h2>
 
 <form method="post">
 {% csrf_token %}

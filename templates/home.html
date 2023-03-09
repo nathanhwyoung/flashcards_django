@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock title %}
-
 {% block content %}
 
-<h2 class="mb-5 fw-normal"><em>HOME</em></h2>
+<h2 class="mb-5 fw-normal">Home</h2>
 
 {% if messages %}
 <div class="messages">
@@ -16,14 +14,11 @@
 
 {% if user.is_authenticated %}
 
-<p>Hi {{ user.email }}!</p>
-<p><a href="{% url 'account_logout' %}">Log Out</a></p> 
+<p>Hi {{ user.username }}!</p>
 
 {% else %}
 
-<p>You are not logged in</p>
-<a href="{% url 'account_login' %}">Log In</a> 
-<a href="{% url 'account_signup' %}">Sign Up</a>
+<p>Please log in to practice.</p>
 
 {% endif %}
 

@@ -13,10 +13,10 @@ class SignupPageView(generic.CreateView):
 
 
 # use UpdateView here at some point
-class ProfileView(generic.ListView):
-    #     # form_class = CustomUserChangeForm
+class AccountView(generic.ListView):
+    # form_class = CustomUserChangeForm
     # model = CustomUser
     # queryset = CustomUser.objects.all()
     # success_url = reverse_lazy("profile")
-    template_name = "account/profile.html"
+    template_name = "account/account.html"
     model = CustomUser
