@@ -74,28 +74,38 @@ def practice(request):
             "card_id", flat=True
         )
     )
+    
+    
     # get total number of cards
     total_cards = Card.objects.count()
-    # get all cards ids
-    all_cards_ids = Card.objects.all().values_list("id", flat=True)
-    # random number from total number of cards
-    random_index = randint(0, total_cards - 1)
-    # get num of cards not understood
-    cards_left = total_cards - len(cards_understood_ids)
+    
+    if total_cards > 0:
+    
+        # get all cards ids
+        all_cards_ids = Card.objects.all().values_list("id", flat=True)
+        # random number from total number of cards
+        random_index = randint(0, total_cards - 1)
+        # get num of cards not understood
+        cards_left = total_cards - len(cards_understood_ids)
 
-    # check to see if the item at random_index in all_cards_ids is already understood
-    if cards_left > 0:
-        while all_cards_ids[random_index] in cards_understood_ids:
-            random_index = randint(0, total_cards - 1)
-        random_card = Card.objects.all()[random_index]
-        context = {
-            "user": current_user,
-            "random_card": random_card,
-        }
-        return render(request, "cards/question.html", context)
+        # check to see if the item at random_index in all_cards_ids is already understood
+        if cards_left > 0:
+            while all_cards_ids[random_index] in cards_understood_ids:
+                random_index = randint(0, total_cards - 1)
+            random_card = Card.objects.all()[random_index]
+            context = {
+                "user": current_user,
+                "random_card": random_card,
+            }
+            return render(request, "cards/question.html", context)
 
-    # implement success page to congratulate user
-    return redirect("leaderboard")
+        # add message to congratulate user if no cards are left
+        return redirect("leaderboard")
+    
+    # add message and redirect
+    return redirect("home")
+    
+    
 
 
 @login_required
