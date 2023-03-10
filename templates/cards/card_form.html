@@ -9,13 +9,11 @@
     <input type="hidden" name="understood" value="{{ understood }}">
 
     {% if understood %}
-        <p>
-        <input type="submit" value="Mark Item Understood" class="btn btn-success"/>
-        </p>
+        <div class="btn-group">
+        <input type="submit" value="Mark Item Understood" class="btn btn-success m-2"/>
         {% else %}
-        <p>
-        <input type="submit" value="Item Not Understood Yet" class="btn btn-danger"/>
-        </p>
+        <input type="submit" value="Item Not Understood Yet" class="btn btn-danger m-2"/>
+        </div>
     {% endif %}
 
 </form>

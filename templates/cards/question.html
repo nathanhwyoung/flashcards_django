@@ -4,32 +4,12 @@
 
 <h2 class="mb-5 fw-normal">Practice</h2>
 
-{% comment %} <div class="card text-center m-auto w-50">
-
-    <div class="card-body">
-
-        <p class="card-text">{{ random_card.question }}</p>
-
-        <a href="#" class="btn btn-primary">Flip Card</a>
-
-        <details>
-            <p>{{ random_card.answer }}</p>
-        </details>
-
-        {% include "cards/card_form.html" with understood=True %}
-        {% include "cards/card_form.html" with understood=False %}
-
-    </div>
-</div> {% endcomment %}
-
-
     <input type="checkbox" id="card"/>
-    <label class="col-md-4 card-container" for="card">
+    <label class="card-container" for="card">
 
-        <div class="card-flip">
+        <div class="card-flip w-50 m-auto">
 
             <div class="card front">
-                <span class="fa fa-4x fa-smile-o text-center"></span>
                 <div class="card-block">
                     <p class="card-text">{{ random_card.question }}</p>
                 </div>
