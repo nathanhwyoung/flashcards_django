@@ -75,12 +75,12 @@ def practice(request):
             "card_id", flat=True
         )
     )
-    
+
     # get total number of cards
     total_cards = Card.objects.count()
-    
+
     if total_cards > 0:
-    
+
         # get all cards ids
         all_cards_ids = Card.objects.all().values_list("id", flat=True)
         # random number from total number of cards
@@ -100,14 +100,14 @@ def practice(request):
             return render(request, "cards/question.html", context)
 
         # add message to congratulate user if no cards are left
-        messages.success(request, 'congratulations! you have mastered all of the cards.')
+        messages.success(
+            request, "congratulations! you have mastered all of the cards."
+        )
         return redirect("leaderboard")
-    
+
     # add message and redirect
-    messages.info(request, 'there are no cards in the stack right now.')
+    messages.info(request, "there are no cards in the stack right now.")
     return redirect("home")
-    
-    
 
 
 @login_required
@@ -125,7 +125,7 @@ def leaderboard(request):
                 if user_progress.is_understood == True:
                     cards_understood += 1
             # % of items completed
-            percentage_completed = cards_understood/total_cards
+            percentage_completed = cards_understood / total_cards
             percentage_completed_formatted = "{:.0%}".format(percentage_completed)
             leaderboard_data.append(
                 {
@@ -134,8 +134,5 @@ def leaderboard(request):
                     "percentage_completed": percentage_completed_formatted,
                 }
             )
-    context = {
-        "data": leaderboard_data
-    }
+    context = {"data": leaderboard_data}
     return render(request, "leaderboard.html", context)
-    
