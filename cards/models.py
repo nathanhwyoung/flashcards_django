@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.urls import reverse
 
 
@@ -24,7 +24,7 @@ class Card(models.Model):
 
 
 class UserProgress(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     is_understood = models.BooleanField(default=False)
     date_first_seen = models.DateTimeField(auto_now_add=True)
@@ -36,4 +36,4 @@ class UserProgress(models.Model):
         return f"CARD ID: {self.card.id}, USER: {self.user}, QUESTION: {self.card.question}, UNDERSTOOD: {self.is_understood}"
 
     class Meta:
-        verbose_name_plural = 'User Progress'
+        verbose_name_plural = "User Progress"
