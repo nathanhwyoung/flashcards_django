@@ -4,13 +4,48 @@
 
 <h2 class="mb-5 fw-normal">Practice</h2>
 
-<p>{{ random_card.question }}</p>
-<details>
-    <p>{{ random_card.answer }}</p>
-</details>
-<br>
+{% comment %} <div class="card text-center m-auto w-50">
 
-{% include "cards/card_form.html" with understood=True %}
-{% include "cards/card_form.html" with understood=False %}
+    <div class="card-body">
+
+        <p class="card-text">{{ random_card.question }}</p>
+
+        <a href="#" class="btn btn-primary">Flip Card</a>
+
+        <details>
+            <p>{{ random_card.answer }}</p>
+        </details>
+
+        {% include "cards/card_form.html" with understood=True %}
+        {% include "cards/card_form.html" with understood=False %}
+
+    </div>
+</div> {% endcomment %}
+
+
+    <input type="checkbox" id="card"/>
+    <label class="col-md-4 card-container" for="card">
+
+        <div class="card-flip">
+
+            <div class="card front">
+                <span class="fa fa-4x fa-smile-o text-center"></span>
+                <div class="card-block">
+                    <p class="card-text">{{ random_card.question }}</p>
+                </div>
+
+            </div>
+
+            <div class="card back">
+                <div class="card-block">
+                    <p class="card-text">{{ random_card.answer }}</p>
+                    {% include "cards/card_form.html" with understood=True %}
+                    {% include "cards/card_form.html" with understood=False %}
+                </div>
+            </div>
+
+        </div>
+
+    </label>
 
 {% endblock content %}
