@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 
-<h2>Practice</h2>
+<h2 class="mb-5 fw-normal">Practice</h2>
 
 <input type="checkbox" id="card" />
 <label class="card-container" for="card">
@@ -15,8 +15,9 @@
     <div class="card back border border-5 border-dark p-3">
       <div class="my-auto">
         <h5 class="card-title">{{ random_card.answer }}</h5>
-        {% include "cards/card_form.html" with understood=True %} {% include
-        "cards/card_form.html" with understood=False %}
+
+        {% include "cards/card_form.html" with understood=True %} 
+        {% include "cards/card_form.html" with understood=False %}
       </div>
     </div>
   </div>
