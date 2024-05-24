@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 INSTALLED_APPS = [
     # "django.contrib.admin",
-    'cards.apps.CardsAdminConfig',
+    "cards.apps.CardsAdminConfig",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -47,8 +47,6 @@ INSTALLED_APPS = [
     # Third-party
     "allauth",
     "allauth.account",
-    "crispy_forms",
-    "crispy_bootstrap5",
     # Local
     "cards.apps.CardsConfig",
     "accounts.apps.AccountsConfig",
@@ -136,7 +134,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -165,7 +163,3 @@ ACCOUNT_FORMS = {
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-# CRISPY CONFIG
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"

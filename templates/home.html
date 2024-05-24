@@ -2,7 +2,10 @@
 
 {% block content %}
 
-<h2 class="mb-5 fw-normal">Home</h2>
+
+
+{% comment %} 
+<h2>Home</h2>
 
 {% if messages %}
 <div class="messages">
@@ -18,7 +21,7 @@
 
 <p>Welcome to Django Flashcards. The resources used for this site are:</p>
 
-<ul class="list-unstyled">
+<ul>
     <li><a href="https://www.interviewbit.com/django-interview-questions/" target="_blank">https://www.interviewbit.com/django-interview-questions/</a></li>
     <li><a href="https://www.javatpoint.com/django-interview-questions-and-answers" target="_blank">https://www.javatpoint.com/django-interview-questions-and-answers</a></li>
     <li><a href="https://mindmajix.com/django-interview-questions" target="_blank">https://mindmajix.com/django-interview-questions</a></li>
@@ -36,6 +39,9 @@
 
 <p>Please log in to practice.</p>
 
-{% endif %}
+{% endif %} {% endcomment %}
+
+
+
 
 {% endblock content %}

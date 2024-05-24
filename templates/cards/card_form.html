@@ -1,19 +1,14 @@
-{% load crispy_forms_tags %}
-
 <form method="post">
+  {% csrf_token %}
 
-    {% csrf_token %}
-    {{ form|crispy }}
+  <input type="hidden" name="card_id" value="{{ random_card.id }}" />
+  <input type="hidden" name="understood" value="{{ understood }}" />
 
-    <input type="hidden" name="card_id" value="{{ random_card.id }}">
-    <input type="hidden" name="understood" value="{{ understood }}">
-
-    {% if understood %}
-        <div class="">
-        <input type="submit" value="Mark Item Understood" class="btn btn-success m-2"/>
-        {% else %}
-        <input type="submit" value="Item Not Understood Yet" class="btn btn-danger m-2"/>
-        </div>
-    {% endif %}
-
+  {% if understood %}
+  <div>
+    <input type="submit" value="Mark Item Understood" />
+    {% else %}
+    <input type="submit" value="Item Not Understood Yet" />
+  </div>
+  {% endif %}
 </form>

@@ -1,31 +1,25 @@
-{% extends "base.html" %} 
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
+<h2>Practice</h2>
 
-<h2 class="mb-5 fw-normal">Practice</h2>
+<input type="checkbox" id="card" />
+<label class="card-container" for="card">
+  <div class="card-flip w-50 m-auto">
+    <div class="card front border border-5 border-dark p-3">
+      <div class="my-auto">
+        <h5 class="card-title">{{ random_card.question }}</h5>
+        <p class="card-text"><em>Click card to reveal answer</em></p>
+      </div>
+    </div>
 
-    <input type="checkbox" id="card"/>
-    <label class="card-container" for="card">
-
-        <div class="card-flip w-50 m-auto">
-
-            <div class="card front border border-5 border-dark p-3">
-                <div class="my-auto">
-                    <h5 class="card-title">{{ random_card.question }}</h5>
-                    <p class="card-text"><em>Click card to reveal answer</em></p>
-                </div>
-            </div>
-
-            <div class="card back border border-5 border-dark p-3">
-                <div class="my-auto">
-                    <h5 class="card-title">{{ random_card.answer }}</h5>
-                    {% include "cards/card_form.html" with understood=True %}
-                    {% include "cards/card_form.html" with understood=False %}
-                </div>
-            </div>
-
-        </div>
-
-    </label>
+    <div class="card back border border-5 border-dark p-3">
+      <div class="my-auto">
+        <h5 class="card-title">{{ random_card.answer }}</h5>
+        {% include "cards/card_form.html" with understood=True %} {% include
+        "cards/card_form.html" with understood=False %}
+      </div>
+    </div>
+  </div>
+</label>
 
 {% endblock content %}
