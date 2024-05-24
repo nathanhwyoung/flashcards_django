@@ -1,15 +1,18 @@
-.card {
-  margin: 10px 10px;
-}
-
 input[type="checkbox"] {
   display: none;
 }
 
 /* Flip Cards CSS */
 .card-container {
-  display: grid;
+  /* border: 1px solid black; */
+  /* display: grid; */
   perspective: 700px;
+
+  /* height: 500px; */
+  /* width: 400px; */
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
 }
 
 .card-flip {
@@ -27,11 +30,17 @@ input[type="checkbox"] {
 
 .front {
   grid-area: frontAndBack;
+  align-items: center;
+  background-color: #0c3c26;
+  color: #fff;
 }
 
 .back {
   grid-area: frontAndBack;
   transform: rotateY(-180deg);
+  align-items: center;
+  background-color: #0c3c26;
+  color: #fff;
 }
 
 input[type="checkbox"]:checked + .card-container .card-flip {
